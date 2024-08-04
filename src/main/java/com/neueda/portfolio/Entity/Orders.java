@@ -27,6 +27,32 @@ public class Orders {
     @NotNull
     private Date transactionDate;
 
+    @Column
+    @NotNull
+    private double pricePerShare;
+
+    @NotNull
+    public double getPricePerShare() {
+        return pricePerShare;
+    }
+
+    public void setPricePerShare(@NotNull double pricePerShare) {
+        this.pricePerShare = pricePerShare;
+    }
+
+    @NotNull
+    public double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(@NotNull double totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    @Column
+    @NotNull
+    private double totalMoney;
+
 
     @ManyToOne
     @JoinColumn(name="tickerSymbol",referencedColumnName = "tickerSymbol",insertable = false,updatable = false)
@@ -89,6 +115,8 @@ public class Orders {
                 ", volume=" + volume +
                 ", action='" + action + '\'' +
                 ", transactionDate=" + transactionDate +
+                ", pricePerShare=" +pricePerShare +
+                ", totalMoney="+totalMoney +
                 '}';
     }
 
