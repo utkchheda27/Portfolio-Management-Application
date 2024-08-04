@@ -32,8 +32,9 @@ public class OrderController {
     @PostMapping("/createOrder")
     public ResponseEntity<String> createOrder(
             @RequestParam String tickerSymbol,
-            @RequestParam int volume,
-            @RequestParam String action) {
+            @RequestParam String action,
+            @RequestParam int volume
+           ) {
 
         try {
             if (tickerSymbol == null || tickerSymbol.isEmpty()) {
