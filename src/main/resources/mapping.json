@@ -1,0 +1,102 @@
+{
+  "AAPL": {
+    "company": "Apple Inc.",
+    "pricePerShare": 196.45
+  },
+  "GOOGL": {
+    "company": "Alphabet Inc.",
+    "pricePerShare": 2837.95
+  },
+  "AMZN": {
+    "company": "Amazon.com Inc.",
+    "pricePerShare": 3295.47
+  },
+  "MSFT": {
+    "company": "Microsoft Corporation",
+    "pricePerShare": 345.65
+  },
+  "TSLA": {
+    "company": "Tesla Inc.",
+    "pricePerShare": 831.51
+  },
+  "NFLX": {
+    "company": "Netflix Inc.",
+    "pricePerShare": 419.72
+  },
+  "META": {
+    "company": "Meta Platforms, Inc.",
+    "pricePerShare": 291.52
+  },
+  "BRK.B": {
+    "company": "Berkshire Hathaway Inc. Class B",
+    "pricePerShare": 355.55
+  },
+  "V": {
+    "company": "Visa Inc.",
+    "pricePerShare": 239.45
+  },
+  "JNJ": {
+    "company": "Johnson & Johnson",
+    "pricePerShare": 173.12
+  },
+  "WMT": {
+    "company": "Walmart Inc.",
+    "pricePerShare": 157.30
+  },
+  "PG": {
+    "company": "Procter & Gamble Co.",
+    "pricePerShare": 149.65
+  },
+  "JPM": {
+    "company": "JPMorgan Chase & Co.",
+    "pricePerShare": 154.65
+  },
+  "DIS": {
+    "company": "The Walt Disney Company",
+    "pricePerShare": 86.35
+  },
+  "NVDA": {
+    "company": "NVIDIA Corporation",
+    "pricePerShare": 478.75
+  },
+  "UNH": {
+    "company": "UnitedHealth Group Incorporated",
+    "pricePerShare": 497.30
+  },
+  "HD": {
+    "company": "The Home Depot, Inc.",
+    "pricePerShare": 330.14
+  },
+  "PYPL": {
+    "company": "PayPal Holdings, Inc.",
+    "pricePerShare": 64.72
+  },
+  "MA": {
+    "company": "Mastercard Incorporated",
+    "pricePerShare": 402.21
+  },
+  "XOM": {
+    "company": "Exxon Mobil Corporation",
+    "pricePerShare": 105.40
+  },
+  "INTC": {
+    "company": "Intel Corporation",
+    "pricePerShare": 34.53
+  },
+  "PFE": {
+    "company": "Pfizer Inc.",
+    "pricePerShare": 36.92
+  },
+  "KO": {
+    "company": "The Coca-Cola Company",
+    "pricePerShare": 63.87
+  },
+  "PEP": {
+    "company": "PepsiCo, Inc.",
+    "pricePerShare": 185.36
+  },
+  "CSCO": {
+    "company": "Cisco Systems, Inc.",
+    "pricePerShare": 54.21
+  }
+}
