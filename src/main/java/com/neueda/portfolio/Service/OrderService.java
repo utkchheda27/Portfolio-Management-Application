@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -27,6 +28,21 @@ public class OrderService {
 
     @Autowired
     private CashflowRepo cashflowRepo;
+
+    public List<Cashflow> getCashFlow(){
+        return cashflowRepo.findAll();
+
+    }
+    public List<Orders> getOrders(){
+        return orderRepo.findAll();
+    }
+    public List<Orders> getOrdersBytickerSymbol(String tickerSymbol){
+        return orderRepo.findBytickerSymbol(tickerSymbol);
+
+    }
+    public List<Cashflow> getCashflowbytickerSymbol(String tickerSymbol){
+        return cashflowRepo.findBytickerSymbol(tickerSymbol);
+    }
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -124,4 +140,5 @@ public class OrderService {
             return objectMapper.readValue(inputStream, Map.class);
         }
     }
+
 }

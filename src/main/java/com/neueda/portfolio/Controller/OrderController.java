@@ -1,6 +1,7 @@
 package com.neueda.portfolio.Controller;
 
 
+import com.neueda.portfolio.Entity.Cashflow;
 import com.neueda.portfolio.Entity.Instrument;
 import com.neueda.portfolio.Entity.Orders;
 import com.neueda.portfolio.Service.OrderService;
@@ -28,6 +29,33 @@ public class OrderController {
         return orderService.getInstrumentByTicker(id);
 
     }*/
+   /* @GetMapping("/cashflowbook")
+    public List<Cashflow> cashFlowBook() {
+        return orderService.getCashFlow();
+    }
+
+    @GetMapping("/orderbook")
+    public List<Orders> orderBook(){
+        return orderService.getOrders();
+    }*/
+   @GetMapping("/orderbook")
+   public List<Orders> getorderbook(@RequestParam(required = false) String tickerSymbol)
+   {
+       if(tickerSymbol==null)
+           return orderService.getOrders();
+       return orderService.getOrdersBytickerSymbol(tickerSymbol);
+   }
+
+    @GetMapping("/cashflowbook")
+    public List<Cashflow> getcashflowbook(@RequestParam(required = false) String tickerSymbol)
+    {
+        if(tickerSymbol==null)
+            return orderService.getCashFlow();
+        return orderService.getCashflowbytickerSymbol(tickerSymbol .);
+    }
+
+
+
 
     @PostMapping("/createOrder")
     public ResponseEntity<String> createOrder(
