@@ -51,7 +51,7 @@ public class OrderController {
     {
         if(tickerSymbol==null)
             return orderService.getCashFlow();
-        return orderService.getCashflowbytickerSymbol(tickerSymbol .);
+        return orderService.getCashflowbytickerSymbol(tickerSymbol);
     }
 
 
