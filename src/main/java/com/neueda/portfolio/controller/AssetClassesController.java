@@ -1,10 +1,10 @@
 
-package com.neueda.portfolio.Controller;
+package com.neueda.portfolio.controller;
 
-import com.neueda.portfolio.Entity.bond;
-import com.neueda.portfolio.Entity.stock;
-import com.neueda.portfolio.Service.bondService;
-import com.neueda.portfolio.Service.stockService;
+import com.neueda.portfolio.entity.bond;
+import com.neueda.portfolio.entity.stock;
+import com.neueda.portfolio.service.bondService;
+import com.neueda.portfolio.service.stockService;
 import com.neueda.portfolio.exception.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
