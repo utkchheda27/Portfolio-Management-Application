@@ -1,13 +1,18 @@
-package com.neueda.portfolio.entity;
+package com.neueda.portfolio.Entity;
 
 import jakarta.persistence.*;
 
 @Entity
 public class StockData {
 
-    @Id
+
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private long id;
+
     @Column(name = "tickerSymbol", nullable = false)
     private String tickerSymbol;
+
 
     @Column(name = "timestamp", nullable = false)
     private String timestamp;
@@ -26,6 +31,27 @@ public class StockData {
 
     @Column(name = "volume")
     private Long volume;
+    public StockData(){
+
+    }
+    public StockData(long id,String tickerSymbol, String timestamp, Double open, Double high, Double low, Double close, Long volume) {
+        this.tickerSymbol = tickerSymbol;
+        this.id=id;
+        this.timestamp = timestamp;
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.volume = volume;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     // Getters and Setters
     public String getTickerSymbol() {

@@ -1,6 +1,6 @@
-package com.neueda.portfolio.repo;
+package com.neueda.portfolio.Repo;
 
-import com.neueda.portfolio.entity.Cashflow;
+import com.neueda.portfolio.Entity.Cashflow;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

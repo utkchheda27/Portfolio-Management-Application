@@ -1,6 +1,6 @@
-package com.neueda.portfolio.repo;
+package com.neueda.portfolio.Repo;
 
-import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.Entity.Instrument;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface InstrumentRepo extends JpaRepository<Instrument, String> {

@@ -1,4 +1,4 @@
-package com.neueda.portfolio.entity;
+package com.neueda.portfolio.Entity;
 import jakarta.persistence.*;
 
 @Entity
