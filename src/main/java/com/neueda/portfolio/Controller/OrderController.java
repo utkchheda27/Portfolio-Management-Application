@@ -16,6 +16,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*",methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
+
 public class OrderController {
     @Autowired
     private OrderService orderService;
@@ -38,6 +40,14 @@ public class OrderController {
     public List<Orders> orderBook(){
         return orderService.getOrders();
     }*/
+   @GetMapping("/tradebook")
+   public List<Instrument> gettradebook(@RequestParam(required = false) String tickerSymbol){
+       if(tickerSymbol==null){
+           return orderService.gettradebook();
+       }
+       return orderService.gettradebookBytickerSymbol(tickerSymbol);
+
+   }
    @GetMapping("/orderbook")
    public List<Orders> getorderbook(@RequestParam(required = false) String tickerSymbol)
    {

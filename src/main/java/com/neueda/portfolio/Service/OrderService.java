@@ -33,6 +33,13 @@ public class OrderService {
         return cashflowRepo.findAll();
 
     }
+    public List<Instrument> gettradebook(){
+        return instrumentRepo.findAll();
+
+    }
+    public List<Instrument> gettradebookBytickerSymbol(String tickerSymbol){
+        return instrumentRepo.findBytickerSymbol(tickerSymbol);
+    }
     public List<Orders> getOrders(){
         return orderRepo.findAll();
     }
