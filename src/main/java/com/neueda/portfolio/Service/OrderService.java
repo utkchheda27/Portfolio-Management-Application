@@ -3,6 +3,7 @@ package com.neueda.portfolio.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.neueda.portfolio.Entity.Cashflow;
 import com.neueda.portfolio.Entity.Instrument;
+import com.neueda.portfolio.Entity.OrderSummary;
 import com.neueda.portfolio.Entity.Orders;
 import com.neueda.portfolio.Repo.CashflowRepo;
 import com.neueda.portfolio.Repo.InstrumentRepo;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,13 @@ public class OrderService {
     public List<Cashflow> getCashFlow(){
         return cashflowRepo.findAll();
 
+    }
+    public List<Instrument> gettradebook(){
+        return instrumentRepo.findAll();
+
+    }
+    public List<Instrument> gettradebookBytickerSymbol(String tickerSymbol){
+        return instrumentRepo.findBytickerSymbol(tickerSymbol);
     }
     public List<Orders> getOrders(){
         return orderRepo.findAll();
@@ -139,6 +148,53 @@ public class OrderService {
             }
             return objectMapper.readValue(inputStream, Map.class);
         }
+    }
+    
+    
+        //to fetch the asset class list
+        
+    public List<OrderSummary> getOrderSummaries() throws IOException {
+        List<OrderSummary> orderSummaries = new ArrayList<>();
+        List<Orders> orders = orderRepo.findAll();
+
+        for (Orders order : orders) {
+            Instrument instrument = order.getInstrument();
+            String tickerSymbol = order.getTickerSymbol();
+            double currentMarketPrice = getPricePerShareFromFile(tickerSymbol);
+            int volume = instrument.getVolume();
+            double boughtPrice = instrument.getAverageBuyPrice();
+            double currentMarketValue = currentMarketPrice * volume;
+            double pnl = calculatePNL(instrument, currentMarketPrice);
+            double pnlPercentage = calculatePNLPercentage(pnl, boughtPrice, volume);
+
+            OrderSummary orderSummary = new OrderSummary();
+            orderSummary.setInstrumentName(instrument.getCompanyName());
+            orderSummary.setDateOfPurchase(order.getTransactionDate());
+            orderSummary.setVolume(volume);
+            orderSummary.setBoughtPrice(boughtPrice);
+            orderSummary.setCurrentMarketPrice(currentMarketPrice);
+            orderSummary.setCurrentMarketValue(currentMarketValue);
+            orderSummary.setPnl(pnl);
+            orderSummary.setPnlPercentage(pnlPercentage);
+
+            orderSummaries.add(orderSummary);
+            
+            // Print to console
+           // System.out.println("Order Summary: " + orderSummary);
+        }
+
+        return orderSummaries;
+        
+        
+    }
+    
+    private double calculatePNL(Instrument instrument, double currentMarketPrice) {
+        return (currentMarketPrice - instrument.getAverageBuyPrice()) * instrument.getVolume();
+    }
+
+    private double calculatePNLPercentage(double pnl, double boughtPrice, int volume) {
+        double totalInvestment = boughtPrice * volume;
+        return (pnl / totalInvestment) * 100;
     }
 
 }

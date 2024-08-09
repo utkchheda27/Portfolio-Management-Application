@@ -1,22 +1,26 @@
 package com.neueda.portfolio.Controller;
 
-
 import com.neueda.portfolio.Entity.Cashflow;
 import com.neueda.portfolio.Entity.Instrument;
+import com.neueda.portfolio.Entity.OrderSummary;
 import com.neueda.portfolio.Entity.Orders;
 import com.neueda.portfolio.Service.OrderService;
+import com.neueda.portfolio.exception.ResponseUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*",methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
+
 public class OrderController {
     @Autowired
     private OrderService orderService;
@@ -39,6 +43,14 @@ public class OrderController {
     public List<Orders> orderBook(){
         return orderService.getOrders();
     }*/
+   @GetMapping("/tradebook")
+   public List<Instrument> gettradebook(@RequestParam(required = false) String tickerSymbol){
+       if(tickerSymbol==null){
+           return orderService.gettradebook();
+       }
+       return orderService.gettradebookBytickerSymbol(tickerSymbol);
+
+   }
    @GetMapping("/orderbook")
    public List<Orders> getorderbook(@RequestParam(required = false) String tickerSymbol)
    {
@@ -55,7 +67,16 @@ public class OrderController {
         return orderService.getCashflowbytickerSymbol(tickerSymbol);
     }
 
-
+// to fetch the asset class list
+    @GetMapping("/orderSummaries")
+    public ResponseEntity<List<OrderSummary>> getOrderSummaries() {
+        try {
+            List<OrderSummary> orderSummaries = orderService.getOrderSummaries();
+            return ResponseEntity.ok(orderSummaries);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(null);
+        }
+    }
 
 
     @PostMapping("/createOrder")
