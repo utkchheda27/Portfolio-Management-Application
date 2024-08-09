@@ -2,6 +2,7 @@ package com.neueda.portfolio.Entity;
 
 import java.util.Date;
 
+
 public class OrderSummary {
 	  private String instrumentName;
 	    private Date dateOfPurchase;
