@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
+@CrossOrigin(origins = "*",methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
 public class AssetClassesController {
 
     public AssetClassesController() {
@@ -30,6 +31,7 @@ public class AssetClassesController {
     @Autowired
     private ResponseUtil responseutil;
 
+    // http://localhost:8080/bondhttp://localhost:8080/bond
     @GetMapping("/bond")
     public ResponseEntity<Object> allBond() {
         System.out.println("All bond");
