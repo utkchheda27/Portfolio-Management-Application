@@ -1,10 +1,7 @@
 package com.neueda.portfolio.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neueda.portfolio.Entity.Cashflow;
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Entity.OrderSummary;
-import com.neueda.portfolio.Entity.Orders;
+import com.neueda.portfolio.Entity.*;
 import com.neueda.portfolio.Repo.CashflowRepo;
 import com.neueda.portfolio.Repo.InstrumentRepo;
 import com.neueda.portfolio.Repo.OrderRepo;
@@ -31,25 +28,30 @@ public class OrderService {
     @Autowired
     private CashflowRepo cashflowRepo;
 
-    public List<Cashflow> getCashFlow(){
+    public List<Cashflow> getCashFlow() {
         return cashflowRepo.findAll();
 
     }
-    public List<Instrument> gettradebook(){
+
+    public List<Instrument> gettradebook() {
         return instrumentRepo.findAll();
 
     }
-    public List<Instrument> gettradebookBytickerSymbol(String tickerSymbol){
+
+    public List<Instrument> gettradebookBytickerSymbol(String tickerSymbol) {
         return instrumentRepo.findBytickerSymbol(tickerSymbol);
     }
-    public List<Orders> getOrders(){
+
+    public List<Orders> getOrders() {
         return orderRepo.findAll();
     }
-    public List<Orders> getOrdersBytickerSymbol(String tickerSymbol){
+
+    public List<Orders> getOrdersBytickerSymbol(String tickerSymbol) {
         return orderRepo.findBytickerSymbol(tickerSymbol);
 
     }
-    public List<Cashflow> getCashflowbytickerSymbol(String tickerSymbol){
+
+    public List<Cashflow> getCashflowbytickerSymbol(String tickerSymbol) {
         return cashflowRepo.findBytickerSymbol(tickerSymbol);
     }
 
@@ -89,8 +91,8 @@ public class OrderService {
         } else {
             if ("Buy".equalsIgnoreCase(action)) {
                 int totalVolume = instrument.getVolume() + volume;
-                double newAveragePrice = ((instrument.getAverageBuyPrice() * instrument.getVolume()) + (volume * pricePerShare)) / totalVolume;
-                instrument.setAverageBuyPrice(newAveragePrice);
+                //double newAveragePrice = ((instrument.getAverageBuyPrice() * instrument.getVolume()) + (volume * pricePerShare)) / totalVolume;
+                //instrument.setAverageBuyPrice(newAveragePrice);
                 instrument.setVolume(totalVolume);
             } else if ("Sell".equalsIgnoreCase(action)) {
                 instrument.setVolume(instrument.getVolume() - volume);
@@ -119,6 +121,7 @@ public class OrderService {
             cashflow.setPnl(pnl);
             cashflow.setTransactionDate(transactionDate);
             cashflow.setInstrument(instrument);
+            cashflow.setVolume(volume);
             cashflowRepo.save(cashflow);
         }
     }
@@ -149,10 +152,8 @@ public class OrderService {
             return objectMapper.readValue(inputStream, Map.class);
         }
     }
-    
-    
-        //to fetch the asset class list
-        
+
+
     public List<OrderSummary> getOrderSummaries() throws IOException {
         List<OrderSummary> orderSummaries = new ArrayList<>();
         List<Orders> orders = orderRepo.findAll();
@@ -178,16 +179,16 @@ public class OrderService {
             orderSummary.setPnlPercentage(pnlPercentage);
 
             orderSummaries.add(orderSummary);
-            
+
             // Print to console
-           // System.out.println("Order Summary: " + orderSummary);
+            // System.out.println("Order Summary: " + orderSummary);
         }
 
         return orderSummaries;
-        
-        
+
+
     }
-    
+
     private double calculatePNL(Instrument instrument, double currentMarketPrice) {
         return (currentMarketPrice - instrument.getAverageBuyPrice()) * instrument.getVolume();
     }
@@ -195,6 +196,77 @@ public class OrderService {
     private double calculatePNLPercentage(double pnl, double boughtPrice, int volume) {
         double totalInvestment = boughtPrice * volume;
         return (pnl / totalInvestment) * 100;
+    }
+
+
+    public List<AssetBook> getAssetBook() throws IOException {
+        List<AssetBook> userAssets = new ArrayList<>();
+        List<Instrument> instruments = instrumentRepo.findAll();
+        System.out.println(instruments);
+
+        for (Instrument i : instruments) {
+            // Instrument instrument = order.getInstrument();
+            String tickerSymbol = i.getTickerSymbol();
+            String companyName = i.getCompanyName();
+            double currentMarketPrice = getPricePerShareFromFile(tickerSymbol);
+            int volume = i.getVolume();
+            double averageBuyPrice = i.getAverageBuyPrice();
+            double pnl = calculatePNL(i, currentMarketPrice);
+            double pnlPercentage = calculatePNLPercentage(pnl, averageBuyPrice, volume);
+
+            AssetBook assetBook = new AssetBook();
+            assetBook.setTickerSymbol(tickerSymbol);
+            assetBook.setVolume(volume);
+            assetBook.setCompanyName(companyName);
+            assetBook.setAverageBuyPrice(averageBuyPrice);
+            assetBook.setCurrentMarketPrice(currentMarketPrice);
+
+            assetBook.setPnl(pnl);
+            assetBook.setPnlPercentage(pnlPercentage);
+
+            userAssets.add(assetBook);
+
+            // Print to console
+            // System.out.println("Order Summary: " + orderSummary);
+        }
+
+        return userAssets;
+
+
+    }
+
+
+    public List<CashflowBook> getCashFlowBook() throws IOException {
+        List<CashflowBook> cashflowBooks = new ArrayList<>();
+
+        List<Instrument> instruments = instrumentRepo.findAll();
+        List<Cashflow> cashflows = cashflowRepo.findAll();
+        for(Cashflow c:cashflows){
+            Instrument instrument = c.getInstrument();
+            String tickerSymbol = c.getTickerSymbol();
+            String companyName = instrument.getCompanyName();
+            double currentMarketPrice = getPricePerShareFromFile(tickerSymbol);
+            int volume = c.getVolume();
+            Date transactiondate=c.getTransactionDate();
+            double averageBuyPrice = instrument.getAverageBuyPrice();
+            double pnl =c.getPnl();
+
+            CashflowBook cashflowBook = new CashflowBook();
+            cashflowBook.setTickerSymbol(tickerSymbol);
+            cashflowBook.setVolume(volume);
+            cashflowBook.setCompanyName(companyName);
+            cashflowBook.setAverageBuyPrice(averageBuyPrice);
+            cashflowBook.setCurrentMarketPrice(currentMarketPrice);
+
+            cashflowBook.setPnl(pnl);
+            cashflowBook.setTransactionDate(transactiondate);
+
+            cashflowBooks.add(cashflowBook);
+
+
+        }
+        return cashflowBooks;
+
     }
 
 }
