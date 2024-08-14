@@ -17,7 +17,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*",methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
+<<<<<<< HEAD:src/main/java/com/neueda/portfolio/Controller/OrderController.java
 
+=======
+>>>>>>> 4368291d745ecda44a2b6bb1a7570cbd3ebb7f6c:src/main/java/com/neueda/portfolio/controller/OrderController.java
 public class OrderController {
     @Autowired
     private OrderService orderService;
