@@ -9,7 +9,6 @@ public class StockData {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private long id;
-
     @Column(name = "tickerSymbol", nullable = false)
     private String tickerSymbol;
 

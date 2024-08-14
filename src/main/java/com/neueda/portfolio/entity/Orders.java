@@ -5,42 +5,62 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
-
 @Entity
-public class Cashflow {
+@Table(name="Orders")
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-    @Column(name="tickerSymbol", length=10)
+
+    @Column(length=10)
     @NotNull
     private String tickerSymbol;
 
     @Column
     @NotNull
-    private double pnl;
+    private int volume;
+
+    @Column(length=10)
+    @NotNull
+    private String action;
 
     @Column
     @NotNull
     private Date transactionDate;
 
+    @Column
+    @NotNull
+    private double pricePerShare;
+    
+    
 
     @NotNull
-    public int getVolume() {
-        return volume;
+    public double getPricePerShare() {
+        return pricePerShare;
     }
 
-    public void setVolume(@NotNull int volume) {
-        this.volume = volume;
+    public void setPricePerShare(@NotNull double pricePerShare) {
+        this.pricePerShare = pricePerShare;
+    }
+
+    @NotNull
+    public double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(@NotNull double totalMoney) {
+        this.totalMoney = totalMoney;
     }
 
     @Column
     @NotNull
-    private int volume;
+    private double totalMoney;
+
 
     @ManyToOne
-    @JoinColumn(name="tickerSymbol", insertable = false, updatable = false)
+    @JoinColumn(name="tickerSymbol",referencedColumnName = "tickerSymbol",insertable = false,updatable = false)
     private Instrument instrument;
-
 
     public Long getId() {
         return id;
@@ -59,12 +79,20 @@ public class Cashflow {
     }
 
     @NotNull
-    public double getPnl() {
-        return pnl;
+    public int getVolume() {
+        return volume;
     }
 
-    public void setPnl(@NotNull double pnl) {
-        this.pnl = pnl;
+    public void setVolume(@NotNull int volume) {
+        this.volume = volume;
+    }
+
+    public @NotNull String getAction() {
+        return action;
+    }
+
+    public void setAction(@NotNull String action) {
+        this.action = action;
     }
 
     public @NotNull Date getTransactionDate() {
@@ -82,14 +110,18 @@ public class Cashflow {
     public void setInstrument(Instrument instrument) {
         this.instrument = instrument;
     }
+
     @Override
     public String toString() {
-        return "Cashflow{" +
+        return "Order{" +
                 "id=" + id +
                 ", tickerSymbol='" + tickerSymbol + '\'' +
-                ", pnl=" + pnl +
-                ",volume="+volume+
+                ", volume=" + volume +
+                ", action='" + action + '\'' +
                 ", transactionDate=" + transactionDate +
+                ", pricePerShare=" +pricePerShare +
+                ", totalMoney="+totalMoney +
                 '}';
     }
+
 }

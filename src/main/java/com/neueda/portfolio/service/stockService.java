@@ -11,15 +11,15 @@ import java.util.List;
 public class stockService {
 
     @Autowired
-    private stockRepo stockrepo;
+    private stockRepo stockRepo;
 
 
     // For getting all the stock
     public List<stock> getAllStock(){
-        return stockrepo.findAll();
+        return stockRepo.findAll();
     }
 
     public List<stock> findByTickerSymbol(String tickerSymbol){
-        return stockrepo.findBytickerSymbol(tickerSymbol);
+        return stockRepo.findBytickerSymbol(tickerSymbol);
     }
 }

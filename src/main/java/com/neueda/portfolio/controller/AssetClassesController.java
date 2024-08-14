@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
+@CrossOrigin(origins = "*",methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
 public class AssetClassesController {
 
     public AssetClassesController() {
@@ -254,6 +255,8 @@ public class AssetClassesController {
             return ResponseEntity.badRequest().body(ResponseUtil.createResponse("FAILURE", null, e.getMessage()));
         }
     }
+
+    //utkarsh checking
 }
 
 

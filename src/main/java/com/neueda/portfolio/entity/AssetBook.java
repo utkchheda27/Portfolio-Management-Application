@@ -74,7 +74,7 @@ public class AssetBook {
     public String toString() {
         return "OrderSummary{" +
                 "tickerSymbol='" + tickerSymbol + '\'' +
-                "companyName='" + companyName + '\'' +
+                ", companyName='" + companyName + '\'' +
                 ", volume=" + volume +
                 ", averageBuyPrice=" + averageBuyPrice +
                 ", currentMarketPrice=" + currentMarketPrice +
