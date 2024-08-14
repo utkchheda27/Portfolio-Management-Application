@@ -14,6 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -94,8 +99,14 @@ public class OrderController {
     public ResponseEntity<String> createOrder(
             @RequestParam String tickerSymbol,
             @RequestParam String action,
+<<<<<<< HEAD:src/main/java/com/neueda/portfolio/controller/OrderController.java
             @RequestParam int volume
     ) {
+=======
+            @RequestParam int volume,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date transactionDate
+           ) {
+>>>>>>> e476deae3ada5dae1f083d46c57f93f34073f741:src/main/java/com/neueda/portfolio/Controller/OrderController.java
 
         try {
             if (tickerSymbol == null || tickerSymbol.isEmpty()) {
@@ -108,7 +119,7 @@ public class OrderController {
                 return ResponseEntity.badRequest().body("Action must be either 'buy' or 'sell'.");
             }
 
-            Date transactionDate=new Date();
+//           Date transactionDate=new Date();
             orderService.processOrder(tickerSymbol, volume, action, transactionDate);
 
 

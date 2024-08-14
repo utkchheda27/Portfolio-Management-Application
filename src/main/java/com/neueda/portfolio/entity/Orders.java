@@ -4,6 +4,7 @@ package com.neueda.portfolio.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Table(name="Orders")
@@ -26,8 +27,7 @@ public class Orders {
     private String action;
 
     @Column
-    @NotNull
-    private Date transactionDate;
+    private @NotNull Date transactionDate;
 
     @Column
     @NotNull

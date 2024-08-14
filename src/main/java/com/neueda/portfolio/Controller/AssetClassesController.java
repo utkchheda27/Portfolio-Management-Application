@@ -31,6 +31,7 @@ public class AssetClassesController {
     @Autowired
     private ResponseUtil responseutil;
 
+    // http://localhost:8080/bond
     @GetMapping("/bond")
     public ResponseEntity<Object> allBond() {
         System.out.println("All bond");

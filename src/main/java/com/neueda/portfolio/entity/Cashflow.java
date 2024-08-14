@@ -71,7 +71,7 @@ public class Cashflow {
         return transactionDate;
     }
 
-    public void setTransactionDate(@NotNull Date transactionDate) {
+    public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
     }
 

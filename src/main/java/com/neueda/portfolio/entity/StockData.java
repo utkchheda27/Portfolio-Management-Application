@@ -6,9 +6,16 @@ import jakarta.persistence.*;
 public class StockData {
 
 
+<<<<<<< HEAD:src/main/java/com/neueda/portfolio/entity/StockData.java
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private long id;
+=======
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+>>>>>>> e476deae3ada5dae1f083d46c57f93f34073f741:src/main/java/com/neueda/portfolio/Entity/StockData.java
     @Column(name = "tickerSymbol", nullable = false)
     private String tickerSymbol;
 
