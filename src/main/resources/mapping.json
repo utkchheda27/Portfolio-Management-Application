@@ -98,5 +98,9 @@
   "CSCO": {
     "company": "Cisco Systems, Inc.",
     "pricePerShare": 54.21
+  },
+  "PYPL": {
+    "company": "Paypal",
+    "pricePerShare": 87
   }
 }

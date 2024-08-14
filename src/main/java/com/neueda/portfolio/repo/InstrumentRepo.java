@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface InstrumentRepo extends JpaRepository<Instrument, String> {
     public List<Instrument> findBytickerSymbol(String tickerSymbol);
+    public List<Instrument> findBytype(String type);
 }

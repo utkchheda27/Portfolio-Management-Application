@@ -28,6 +28,7 @@ public class InstrumentController {
         return instrument.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
     @PostMapping
     public Instrument createInstrument(@RequestBody Instrument instrument) {
         return instrumentService.saveInstrument(instrument);

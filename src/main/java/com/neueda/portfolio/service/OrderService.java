@@ -1,10 +1,20 @@
 package com.neueda.portfolio.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.neueda.portfolio.Entity.Cashflow;
+import com.neueda.portfolio.Entity.Instrument;
+import com.neueda.portfolio.Entity.OrderSummary;
+import com.neueda.portfolio.Entity.Orders;
+import com.neueda.portfolio.Repo.CashflowRepo;
+import com.neueda.portfolio.Repo.InstrumentRepo;
+import com.neueda.portfolio.Repo.OrderRepo;
+
 import com.neueda.portfolio.Entity.*;
 import com.neueda.portfolio.Repo.CashflowRepo;
 import com.neueda.portfolio.Repo.InstrumentRepo;
 import com.neueda.portfolio.Repo.OrderRepo;
+
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -34,7 +45,9 @@ public class OrderService {
     }
 
     public List<Instrument> gettradebook() {
-        return instrumentRepo.findAll();
+        return instrumentRepo.findAll().stream()
+                .filter(instrument -> "stock".equalsIgnoreCase(instrument.getType()))
+                .collect(Collectors.toList());
 
     }
 
@@ -64,7 +77,7 @@ public class OrderService {
             transactionDate = new Date();
         }
 
-        // Retrieve the instrument from the repository
+        // Retrieve the instrument from the Repository
         Instrument instrument = instrumentRepo.findById(tickerSymbol).orElse(null);
         double pricePerShare = getPricePerShareFromFile(tickerSymbol);
 
@@ -126,7 +139,7 @@ public class OrderService {
         }
     }
 
-    private double getPricePerShareFromFile(String tickerSymbol) throws IOException {
+    public double getPricePerShareFromFile(String tickerSymbol) throws IOException {
         Map<String, Map<String, Object>> data = readPriceDataFromClassPath();
         Map<String, Object> companyData = data.get(tickerSymbol);
         if (companyData != null && companyData.containsKey("pricePerShare")) {
@@ -201,7 +214,9 @@ public class OrderService {
 
     public List<AssetBook> getAssetBook() throws IOException {
         List<AssetBook> userAssets = new ArrayList<>();
-        List<Instrument> instruments = instrumentRepo.findAll();
+        List<Instrument> instruments = instrumentRepo.findAll().stream()
+                .filter(instrument -> "stock".equalsIgnoreCase(instrument.getType()))
+                .collect(Collectors.toList());
         System.out.println(instruments);
 
         for (Instrument i : instruments) {
@@ -239,7 +254,9 @@ public class OrderService {
     public List<CashflowBook> getCashFlowBook() throws IOException {
         List<CashflowBook> cashflowBooks = new ArrayList<>();
 
-        List<Instrument> instruments = instrumentRepo.findAll();
+        List<Instrument> instruments = instrumentRepo.findAll().stream()
+                .filter(instrument -> "stock".equalsIgnoreCase(instrument.getType()))
+                .collect(Collectors.toList());
         List<Cashflow> cashflows = cashflowRepo.findAll();
         for(Cashflow c:cashflows){
             Instrument instrument = c.getInstrument();

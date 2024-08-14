@@ -21,6 +21,9 @@ public class InstrumentService {
     public Optional<Instrument> getInstrumentByTickerSymbol(String tickerSymbol) {
         return instrumentRepo.findById(tickerSymbol);
     }
+    public List<Instrument> getInstrumentBytype(String type) {
+        return instrumentRepo.findBytype(type);
+    }
 
     public Instrument saveInstrument(Instrument instrument) {
         return instrumentRepo.save(instrument);

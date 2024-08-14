@@ -32,6 +32,8 @@ public class Orders {
     @Column
     @NotNull
     private double pricePerShare;
+    
+    
 
     @NotNull
     public double getPricePerShare() {

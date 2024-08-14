@@ -88,7 +88,7 @@ public class Cashflow {
                 "id=" + id +
                 ", tickerSymbol='" + tickerSymbol + '\'' +
                 ", pnl=" + pnl +
-                ",volume="+volume+
+                ", volume="+volume+
                 ", transactionDate=" + transactionDate +
                 '}';
     }
