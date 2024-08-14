@@ -10,6 +10,7 @@ import java.util.Date;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(length=10)
@@ -31,6 +32,8 @@ public class Orders {
     @Column
     @NotNull
     private double pricePerShare;
+    
+    
 
     @NotNull
     public double getPricePerShare() {

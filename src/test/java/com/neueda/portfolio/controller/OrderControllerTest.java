@@ -1,5 +1,205 @@
 package com.neueda.portfolio.controller;
 
+import com.neueda.portfolio.entity.AssetBook;
+import com.neueda.portfolio.entity.Cashflow;
+import com.neueda.portfolio.entity.CashflowBook;
+import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.entity.OrderSummary;
+import com.neueda.portfolio.entity.Orders;
+import com.neueda.portfolio.service.OrderService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import static org.mockito.Mockito.*;
+
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+class OrderControllerTest {
+
+    private MockMvc mockMvc;
+
+    @Mock
+    private OrderService orderService;
+
+    @InjectMocks
+    private OrderController orderController;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(orderController).build();
+    }
+
+    @Test
+    void testGetTradeBookWithoutTickerSymbol() throws Exception {
+        List<Instrument> instrumentList = new ArrayList<>();
+        instrumentList.add(new Instrument());
+        when(orderService.gettradebook()).thenReturn(instrumentList);
+
+        mockMvc.perform(get("/api/tradebook")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
+    }
+
+    @Test
+    void testGetTradeBookWithTickerSymbol() throws Exception {
+        List<Instrument> instrumentList = new ArrayList<>();
+        instrumentList.add(new Instrument());
+        when(orderService.gettradebookBytickerSymbol(anyString())).thenReturn(instrumentList);
+
+        mockMvc.perform(get("/api/tradebook")
+                .param("tickerSymbol", "AAPL")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
+    }
+
+    @Test
+    void testGetOrderBookWithoutTickerSymbol() throws Exception {
+        List<Orders> ordersList = new ArrayList<>();
+        ordersList.add(new Orders());
+        when(orderService.getOrders()).thenReturn(ordersList);
+
+        mockMvc.perform(get("/api/orderbook")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
+    }
+
+    @Test
+    void testGetOrderBookWithTickerSymbol() throws Exception {
+        List<Orders> ordersList = new ArrayList<>();
+        ordersList.add(new Orders());
+        when(orderService.getOrdersBytickerSymbol(anyString())).thenReturn(ordersList);
+
+        mockMvc.perform(get("/api/orderbook")
+                .param("tickerSymbol", "AAPL")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
+    }
+
+    
+    @Test
+    void testGetCashflowBook() throws Exception {
+        // Correct type for the list
+        List<CashflowBook> cashflowList = new ArrayList<>();
+        cashflowList.add(new CashflowBook());
+
+        // Mocking the service method call to return the correct list
+        when(orderService.getCashFlowBook()).thenReturn(cashflowList);
+
+        // Perform the GET request and validate the response
+        mockMvc.perform(get("/api/cashflowbook")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
+    }
+
+
+    @Test
+    void testGetOrderSummaries() throws Exception {
+        List<OrderSummary> orderSummaryList = new ArrayList<>();
+        orderSummaryList.add(new OrderSummary());
+        when(orderService.getOrderSummaries()).thenReturn(orderSummaryList);
+
+        mockMvc.perform(get("/api/orderSummaries")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
+    }
+
+    @Test
+    void testGetAssetBook() throws Exception {
+        List<AssetBook> assetBookList = new ArrayList<>();
+        assetBookList.add(new AssetBook());
+        when(orderService.getAssetBook()).thenReturn(assetBookList);
+
+        mockMvc.perform(get("/api/assetBook")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
+    }
+
+    @Test
+    void testCreateOrder_Success() throws Exception {
+        mockMvc.perform(post("/api/createOrder")
+                .param("tickerSymbol", "AAPL")
+                .param("action", "buy")
+                .param("volume", "10")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Order processed successfully."));
+    }
+
+    @Test
+    void testCreateOrder_InvalidTickerSymbol() throws Exception {
+        mockMvc.perform(post("/api/createOrder")
+                .param("tickerSymbol", "")
+                .param("action", "buy")
+                .param("volume", "10")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Ticker symbol cannot be null or empty."));
+    }
+
+    @Test
+    void testCreateOrder_InvalidVolume() throws Exception {
+        mockMvc.perform(post("/api/createOrder")
+                .param("tickerSymbol", "AAPL")
+                .param("action", "buy")
+                .param("volume", "0")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Volume must be greater than zero."));
+    }
+
+    @Test
+    void testCreateOrder_InvalidAction() throws Exception {
+        mockMvc.perform(post("/api/createOrder")
+                .param("tickerSymbol", "AAPL")
+                .param("action", "hold")
+                .param("volume", "10")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Action must be either 'buy' or 'sell'."));
+    }
+
+   /* @Test
+    void testCreateOrder_InternalServerError() throws Exception {
+        when(orderService.processOrder(anyString(), anyInt(), anyString(), any(Date.class)))
+                .thenThrow(new RuntimeException("Test Exception"));
+
+        mockMvc.perform(post("/api/createOrder")
+                .param("tickerSymbol", "AAPL")
+                .param("action", "buy")
+                .param("volume", "10")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().string("An error occurred while processing the order: Test Exception"));
+    }*/
+    
+ 
+}
+
+
+/*
 import com.neueda.portfolio.entity.Cashflow;
 import com.neueda.portfolio.entity.Instrument;
 import com.neueda.portfolio.entity.OrderSummary;
@@ -169,4 +369,4 @@ public class OrderControllerTest {
 	        assertEquals(2, response.size());
 	    }
 
-}
+}*/

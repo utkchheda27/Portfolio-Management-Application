@@ -5,14 +5,14 @@ import com.neueda.portfolio.entity.Instrument;
 import com.neueda.portfolio.entity.OrderSummary;
 import com.neueda.portfolio.entity.Orders;
 import com.neueda.portfolio.service.OrderService;
+import com.neueda.portfolio.entity.*;
+import com.neueda.portfolio.service.OrderService;
 import com.neueda.portfolio.exception.ResponseUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -60,11 +60,13 @@ public class OrderController {
    }
 
     @GetMapping("/cashflowbook")
-    public List<Cashflow> getcashflowbook(@RequestParam(required = false) String tickerSymbol)
-    {
-        if(tickerSymbol==null)
-            return orderService.getCashFlow();
-        return orderService.getCashflowbytickerSymbol(tickerSymbol);
+    public ResponseEntity<List<CashflowBook>> getcashFlowBook() {
+        try {
+            List<CashflowBook> cashflowbooks = orderService.getCashFlowBook();
+            return ResponseEntity.ok(cashflowbooks);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
 // to fetch the asset class list
@@ -73,6 +75,15 @@ public class OrderController {
         try {
             List<OrderSummary> orderSummaries = orderService.getOrderSummaries();
             return ResponseEntity.ok(orderSummaries);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+    @GetMapping("/assetBook")
+    public ResponseEntity<List<AssetBook>> getAssetBook() {
+        try {
+            List<AssetBook> userAssets = orderService.getAssetBook();
+            return ResponseEntity.ok(userAssets);
         } catch (IOException e) {
             return ResponseEntity.status(500).body(null);
         }
