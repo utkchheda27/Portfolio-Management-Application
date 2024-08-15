@@ -31,14 +31,15 @@ public class Instrument {
         this.volume = volume;
         this.type = type;
     }
+    
     @Override
     public String toString() {
         return "Instrument{" +
                 "tickerSymbol='" + tickerSymbol + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", averageBuyPrice=" + averageBuyPrice +
-                ", volume=" + volume + '\'' +
-                ", type=" + type +
+                ", volume=" + volume +
+               ", type=" + type +
                 '}';
     }
 

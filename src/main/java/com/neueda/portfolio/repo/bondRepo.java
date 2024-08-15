@@ -1,8 +1,9 @@
 package com.neueda.portfolio.repo;
 
-import com.neueda.portfolio.entity.bond;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.neueda.portfolio.entity.bond;
 
 import java.util.List;
 

@@ -10,6 +10,7 @@ import java.util.Date;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(length=10)
@@ -25,12 +26,13 @@ public class Orders {
     private String action;
 
     @Column
-    @NotNull
-    private Date transactionDate;
+    private @NotNull Date transactionDate;
 
     @Column
     @NotNull
     private double pricePerShare;
+    
+    
 
     @NotNull
     public double getPricePerShare() {

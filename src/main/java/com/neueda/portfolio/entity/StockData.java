@@ -1,6 +1,10 @@
 package com.neueda.portfolio.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class StockData {
@@ -53,7 +57,6 @@ public class StockData {
         this.id = id;
     }
 
-    // Getters and Setters
     public String getTickerSymbol() {
         return tickerSymbol;
     }

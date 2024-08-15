@@ -1,8 +1,12 @@
 package com.neueda.portfolio.repo;
 
-import com.neueda.portfolio.entity.Instrument;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface InstrumentRepo extends JpaRepository<Instrument, String> {
+import com.neueda.portfolio.entity.Instrument;
 
+import java.util.List;
+
+public interface InstrumentRepo extends JpaRepository<Instrument, String> {
+    public List<Instrument> findBytickerSymbol(String tickerSymbol);
+    public List<Instrument> findBytype(String type);
 }

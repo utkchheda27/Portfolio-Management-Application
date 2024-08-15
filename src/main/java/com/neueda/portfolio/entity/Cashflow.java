@@ -23,6 +23,20 @@ public class Cashflow {
     @NotNull
     private Date transactionDate;
 
+
+    @NotNull
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(@NotNull int volume) {
+        this.volume = volume;
+    }
+
+    @Column
+    @NotNull
+    private int volume;
+
     @ManyToOne
     @JoinColumn(name="tickerSymbol", insertable = false, updatable = false)
     private Instrument instrument;
@@ -57,7 +71,7 @@ public class Cashflow {
         return transactionDate;
     }
 
-    public void setTransactionDate(@NotNull Date transactionDate) {
+    public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -74,6 +88,7 @@ public class Cashflow {
                 "id=" + id +
                 ", tickerSymbol='" + tickerSymbol + '\'' +
                 ", pnl=" + pnl +
+                ", volume="+volume+
                 ", transactionDate=" + transactionDate +
                 '}';
     }
