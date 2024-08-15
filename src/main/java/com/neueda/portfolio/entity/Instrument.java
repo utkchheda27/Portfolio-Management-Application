@@ -31,6 +31,7 @@ public class Instrument {
         this.volume = volume;
         this.type = type;
     }
+    
     @Override
     public String toString() {
         return "Instrument{" +

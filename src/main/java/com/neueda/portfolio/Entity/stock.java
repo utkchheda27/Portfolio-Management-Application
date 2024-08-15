@@ -32,8 +32,6 @@ public class stock {
     @Column(nullable = false)
     private String marketExchange;
 
-    // Getters and setters
-
     public Long getId() {
         return id;
     }

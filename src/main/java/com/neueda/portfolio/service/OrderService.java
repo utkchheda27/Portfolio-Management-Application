@@ -241,9 +241,6 @@ public class OrderService {
             assetBook.setPnlPercentage(pnlPercentage);
 
             userAssets.add(assetBook);
-
-            // Print to console
-            // System.out.println("Order Summary: " + orderSummary);
         }
 
         return userAssets;

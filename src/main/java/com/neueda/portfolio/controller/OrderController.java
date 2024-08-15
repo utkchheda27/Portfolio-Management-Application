@@ -1,26 +1,27 @@
 package com.neueda.portfolio.Controller;
 
-import com.neueda.portfolio.Entity.Cashflow;
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Entity.OrderSummary;
-import com.neueda.portfolio.Entity.Orders;
-import com.neueda.portfolio.Service.OrderService;
-import com.neueda.portfolio.Entity.*;
-import com.neueda.portfolio.Service.OrderService;
-import com.neueda.portfolio.exception.ResponseUtil;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.neueda.portfolio.Entity.AssetBook;
+import com.neueda.portfolio.Entity.CashflowBook;
+import com.neueda.portfolio.Entity.Instrument;
+import com.neueda.portfolio.Entity.OrderSummary;
+import com.neueda.portfolio.Entity.Orders;
+import com.neueda.portfolio.Service.OrderService;
 
 @RestController
 @RequestMapping("/api")
@@ -29,25 +30,6 @@ import java.util.List;
 public class OrderController {
     @Autowired
     private OrderService orderService;
-
-    /* @GetMapping
-     public List<Orders> getOrders() {
-         return orderService.getAllOrders();
-     }
-     @GetMapping("/{id}")
-     public Instrument getInstrument(@PathVariable String id){
-         return orderService.getInstrumentByTicker(id);
-
-     }*/
-   /* @GetMapping("/cashflowbook")
-    public List<Cashflow> cashFlowBook() {
-        return orderService.getCashFlow();
-    }
-
-    @GetMapping("/orderbook")
-    public List<Orders> orderBook(){
-        return orderService.getOrders();
-    }*/
     @GetMapping("/tradebook")
     public List<Instrument> gettradebook(@RequestParam(required = false) String tickerSymbol){
         if(tickerSymbol==null){
@@ -99,14 +81,9 @@ public class OrderController {
     public ResponseEntity<String> createOrder(
             @RequestParam String tickerSymbol,
             @RequestParam String action,
-<<<<<<< HEAD:src/main/java/com/neueda/portfolio/controller/OrderController.java
-            @RequestParam int volume
-    ) {
-=======
             @RequestParam int volume,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date transactionDate
            ) {
->>>>>>> e476deae3ada5dae1f083d46c57f93f34073f741:src/main/java/com/neueda/portfolio/Controller/OrderController.java
 
         try {
             if (tickerSymbol == null || tickerSymbol.isEmpty()) {

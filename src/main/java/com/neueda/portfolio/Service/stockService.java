@@ -13,8 +13,6 @@ public class stockService {
     @Autowired
     private stockRepo stockRepo;
 
-
-    // For getting all the stock
     public List<stock> getAllStock(){
         return stockRepo.findAll();
     }

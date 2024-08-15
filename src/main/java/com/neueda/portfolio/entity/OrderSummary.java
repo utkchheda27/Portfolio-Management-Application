@@ -13,8 +13,6 @@ public class OrderSummary {
 	    private double pnl;
 	    private double pnlPercentage;
 
-	    // Getters and setters
-
 	    @Override
 	    public String toString() {
 	        return "OrderSummary{" +
