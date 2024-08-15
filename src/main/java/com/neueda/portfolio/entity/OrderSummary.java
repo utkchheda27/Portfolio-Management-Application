@@ -1,4 +1,4 @@
-package com.neueda.portfolio.Entity;
+package com.neueda.portfolio.entity;
 
 import java.util.Date;
 

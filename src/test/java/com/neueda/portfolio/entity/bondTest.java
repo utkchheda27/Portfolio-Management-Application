@@ -1,6 +1,7 @@
 package com.neueda.portfolio.entity;
-import com.neueda.portfolio.Entity.bond;
 import org.junit.jupiter.api.Test;
+
+import com.neueda.portfolio.entity.bond;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

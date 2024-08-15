@@ -1,8 +1,9 @@
 package com.neueda.portfolio.entity;
 
 
-import com.neueda.portfolio.Entity.Cashflow;
 import org.junit.jupiter.api.Test;
+
+import com.neueda.portfolio.entity.Cashflow;
 
 import java.util.Date;
 

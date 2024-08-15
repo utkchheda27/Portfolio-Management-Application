@@ -1,13 +1,14 @@
 package com.neueda.portfolio.controller;
 
-import com.neueda.portfolio.Controller.OrderController;
-import com.neueda.portfolio.Entity.AssetBook;
-import com.neueda.portfolio.Entity.Cashflow;
-import com.neueda.portfolio.Entity.CashflowBook;
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Entity.OrderSummary;
-import com.neueda.portfolio.Entity.Orders;
-import com.neueda.portfolio.Service.OrderService;
+import com.neueda.portfolio.controller.OrderController;
+import com.neueda.portfolio.service.OrderService;
+import com.neueda.portfolio.entity.AssetBook;
+import com.neueda.portfolio.entity.Cashflow;
+import com.neueda.portfolio.entity.CashflowBook;
+import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.entity.OrderSummary;
+import com.neueda.portfolio.entity.Orders;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

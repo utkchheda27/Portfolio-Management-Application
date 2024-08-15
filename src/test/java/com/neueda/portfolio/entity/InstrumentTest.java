@@ -1,8 +1,9 @@
 package com.neueda.portfolio.entity;
 
 
-import com.neueda.portfolio.Entity.Instrument;
 import org.junit.jupiter.api.Test;
+
+import com.neueda.portfolio.entity.Instrument;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,18 +17,21 @@ public class InstrumentTest {
         String companyName = "Apple Inc.";
         double averageBuyPrice = 150.0;
         int volume = 100;
+        String type = "Apple Inc.";
 
         // Act
         instrument.setTickerSymbol(tickerSymbol);
         instrument.setCompanyName(companyName);
         instrument.setAverageBuyPrice(averageBuyPrice);
         instrument.setVolume(volume);
+        instrument.setType(companyName);
 
         // Assert
         assertEquals(tickerSymbol, instrument.getTickerSymbol());
         assertEquals(companyName, instrument.getCompanyName());
         assertEquals(averageBuyPrice, instrument.getAverageBuyPrice());
         assertEquals(volume, instrument.getVolume());
+        assertEquals(type, instrument.getType());
     }
 
     @Test
@@ -37,15 +41,17 @@ public class InstrumentTest {
         String companyName = "Apple Inc.";
         double averageBuyPrice = 150.0;
         int volume = 100;
+        String type = "Apple Inc.";
 
         // Act
-        Instrument instrument = new Instrument(tickerSymbol, companyName, averageBuyPrice, volume);
+        Instrument instrument = new Instrument(tickerSymbol, companyName, averageBuyPrice, volume, type);
 
         // Assert
         assertEquals(tickerSymbol, instrument.getTickerSymbol());
         assertEquals(companyName, instrument.getCompanyName());
         assertEquals(averageBuyPrice, instrument.getAverageBuyPrice());
         assertEquals(volume, instrument.getVolume());
+        assertEquals(type, instrument.getType());
     }
 
     @Test
@@ -55,10 +61,11 @@ public class InstrumentTest {
         String companyName = "Apple Inc.";
         double averageBuyPrice = 150.0;
         int volume = 100;
-        Instrument instrument = new Instrument(tickerSymbol, companyName, averageBuyPrice, volume);
+        String type = "Apple Inc.";
+        Instrument instrument = new Instrument(tickerSymbol, companyName, averageBuyPrice, volume, companyName);
 
         // Act
-        String expectedToString = "Instrument{tickerSymbol='AAPL', companyName='Apple Inc.', averageBuyPrice=150.0, volume=100}";
+        String expectedToString = "Instrument{tickerSymbol='AAPL', companyName='Apple Inc.', averageBuyPrice=150.0, volume=100, type=Apple Inc.}";
         String actualToString = instrument.toString();
 
         // Assert

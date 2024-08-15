@@ -1,10 +1,11 @@
 package com.neueda.portfolio.repo;
 import java.util.stream.Collectors;
 
-import com.neueda.portfolio.Repo.InstrumentRepo;
-import com.neueda.portfolio.Repo.OrderRepo;
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Entity.Orders;
+import com.neueda.portfolio.repo.InstrumentRepo;
+import com.neueda.portfolio.repo.OrderRepo;
+import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.entity.Orders;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
