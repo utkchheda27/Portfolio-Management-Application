@@ -1,4 +1,4 @@
-package com.neueda.portfolio.Entity;
+package com.neueda.portfolio.entity;
 
 
 import jakarta.persistence.Column;
@@ -38,8 +38,8 @@ public class Instrument {
                 "tickerSymbol='" + tickerSymbol + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", averageBuyPrice=" + averageBuyPrice +
-                ", volume=" + volume + '\'' +
-                ", type=" + type +
+                ", volume=" + volume +
+               ", type=" + type +
                 '}';
     }
 

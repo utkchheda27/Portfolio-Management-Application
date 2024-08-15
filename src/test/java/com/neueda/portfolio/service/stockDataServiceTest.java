@@ -1,8 +1,7 @@
 package com.neueda.portfolio.service;
 
-import com.neueda.portfolio.Service.StockDataService;
-import com.neueda.portfolio.Entity.StockData;
-import com.neueda.portfolio.Repo.StockDataRepo;
+import com.neueda.portfolio.entity.StockData;
+import com.neueda.portfolio.repo.StockDataRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,4 +1,4 @@
-package com.neueda.portfolio.Entity;
+package com.neueda.portfolio.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

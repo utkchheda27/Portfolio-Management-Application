@@ -1,9 +1,10 @@
-package com.neueda.portfolio.Controller;
+package com.neueda.portfolio.controller;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import com.neueda.portfolio.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.neueda.portfolio.Entity.AssetBook;
-import com.neueda.portfolio.Entity.CashflowBook;
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Entity.OrderSummary;
-import com.neueda.portfolio.Entity.Orders;
-import com.neueda.portfolio.Service.OrderService;
+import com.neueda.portfolio.entity.AssetBook;
+import com.neueda.portfolio.entity.CashflowBook;
+import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.entity.OrderSummary;
+import com.neueda.portfolio.entity.Orders;
 
 @RestController
 @RequestMapping("/api")

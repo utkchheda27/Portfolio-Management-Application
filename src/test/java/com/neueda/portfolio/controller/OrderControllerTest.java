@@ -1,13 +1,12 @@
 package com.neueda.portfolio.controller;
 
-import com.neueda.portfolio.Controller.OrderController;
-import com.neueda.portfolio.Entity.AssetBook;
-import com.neueda.portfolio.Entity.Cashflow;
-import com.neueda.portfolio.Entity.CashflowBook;
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Entity.OrderSummary;
-import com.neueda.portfolio.Entity.Orders;
-import com.neueda.portfolio.Service.OrderService;
+import com.neueda.portfolio.service.OrderService;
+import com.neueda.portfolio.entity.AssetBook;
+import com.neueda.portfolio.entity.CashflowBook;
+import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.entity.OrderSummary;
+import com.neueda.portfolio.entity.Orders;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,9 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import static org.mockito.Mockito.*;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -170,14 +167,13 @@ class OrderControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Volume must be greater than zero."));
     }
-
     @Test
     void testCreateOrder_InvalidAction() throws Exception {
         mockMvc.perform(post("/api/createOrder")
-                .param("tickerSymbol", "AAPL")
-                .param("action", "hold")
-                .param("volume", "10")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .param("tickerSymbol", "AAPL")
+                        .param("action", "hold")  // Invalid action
+                        .param("volume", "10")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Action must be either 'buy' or 'sell'."));
     }
@@ -201,10 +197,10 @@ class OrderControllerTest {
 
 
 /*
-import com.neueda.portfolio.entity.Cashflow;
-import com.neueda.portfolio.entity.Instrument;
-import com.neueda.portfolio.entity.OrderSummary;
-import com.neueda.portfolio.entity.Orders;
+import com.neueda.portfolio.Entity.Cashflow;
+import com.neueda.portfolio.Entity.Instrument;
+import com.neueda.portfolio.Entity.OrderSummary;
+import com.neueda.portfolio.Entity.Orders;
 import com.neueda.portfolio.service.OrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,19 +1,10 @@
-package com.neueda.portfolio.Service;
+package com.neueda.portfolio.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.neueda.portfolio.Entity.Cashflow;
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Entity.OrderSummary;
-import com.neueda.portfolio.Entity.Orders;
-import com.neueda.portfolio.Repo.CashflowRepo;
-import com.neueda.portfolio.Repo.InstrumentRepo;
-import com.neueda.portfolio.Repo.OrderRepo;
-
-import com.neueda.portfolio.Entity.*;
-import com.neueda.portfolio.Repo.CashflowRepo;
-import com.neueda.portfolio.Repo.InstrumentRepo;
-import com.neueda.portfolio.Repo.OrderRepo;
+import com.neueda.portfolio.repo.CashflowRepo;
+import com.neueda.portfolio.repo.InstrumentRepo;
+import com.neueda.portfolio.repo.OrderRepo;
+import com.neueda.portfolio.entity.*;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -149,7 +139,7 @@ public class OrderService {
         throw new RuntimeException("Price data not found for ticker symbol: " + tickerSymbol);
     }
 
-    private String getCompanyNameFromFile(String tickerSymbol) throws IOException {
+    String getCompanyNameFromFile(String tickerSymbol) throws IOException {
         Map<String, Map<String, Object>> data = readPriceDataFromClassPath();
         Map<String, Object> companyData = data.get(tickerSymbol);
         if (companyData != null && companyData.containsKey("company")) {

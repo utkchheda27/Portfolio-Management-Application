@@ -1,7 +1,7 @@
-package com.neueda.portfolio.Controller;
+package com.neueda.portfolio.controller;
 
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Service.InstrumentService;
+import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.service.InstrumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,8 @@
-package com.neueda.portfolio.Repo;
+package com.neueda.portfolio.repo;
 
-import com.neueda.portfolio.Entity.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.neueda.portfolio.entity.Orders;
 
 import java.util.List;
 

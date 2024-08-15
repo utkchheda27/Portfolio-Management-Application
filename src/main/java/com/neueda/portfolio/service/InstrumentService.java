@@ -1,7 +1,7 @@
-package com.neueda.portfolio.Service;
+package com.neueda.portfolio.service;
 
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Repo.InstrumentRepo;
+import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.repo.InstrumentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

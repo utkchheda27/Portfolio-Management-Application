@@ -1,11 +1,11 @@
 package com.neueda.portfolio.controller;
 
 
-import com.neueda.portfolio.Controller.AssetClassesController;
-import com.neueda.portfolio.Service.bondService;
-import com.neueda.portfolio.Service.stockService;
-import com.neueda.portfolio.Entity.bond;
-import com.neueda.portfolio.Entity.stock;
+import com.neueda.portfolio.service.bondService;
+import com.neueda.portfolio.service.stockService;
+import com.neueda.portfolio.entity.bond;
+import com.neueda.portfolio.entity.stock;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
