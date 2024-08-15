@@ -4,5 +4,5 @@ EXPOSE 8080
 ARG DBUSER
 ENV DBUSER=root
 ARG DBPASSWORD
-ENV DBPASSWORD=
+ENV DBPASSWORD=root
 CMD ["java","-jar","-Dspring.profiles.active=production", "app.jar"]
