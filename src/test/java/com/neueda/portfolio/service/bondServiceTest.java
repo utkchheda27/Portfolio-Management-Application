@@ -1,9 +1,10 @@
 package com.neueda.portfolio.service;
 
 
-import com.neueda.portfolio.Entity.bond;
-import com.neueda.portfolio.Repo.bondRepo;
-import com.neueda.portfolio.Service.bondService;
+import com.neueda.portfolio.repo.bondRepo;
+import com.neueda.portfolio.service.bondService;
+import com.neueda.portfolio.entity.bond;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

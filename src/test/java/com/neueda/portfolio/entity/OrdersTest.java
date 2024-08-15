@@ -1,9 +1,10 @@
 package com.neueda.portfolio.entity;
 
-import com.neueda.portfolio.Entity.Instrument;
-import com.neueda.portfolio.Entity.Orders;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.neueda.portfolio.entity.Instrument;
+import com.neueda.portfolio.entity.Orders;
 
 import java.util.Date;
 

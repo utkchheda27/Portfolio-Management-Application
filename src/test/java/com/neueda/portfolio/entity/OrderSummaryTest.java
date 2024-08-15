@@ -1,7 +1,8 @@
 package com.neueda.portfolio.entity;
 
-import com.neueda.portfolio.Entity.OrderSummary;
 import org.junit.jupiter.api.Test;
+
+import com.neueda.portfolio.entity.OrderSummary;
 
 import java.util.Date;
 
